@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2c2c2c</color>
+    <color name="colorPrimaryDark">#2c2c2c</color>
+    <color name="colorAccent">#333333</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_a9a9a9">#a9a9a9</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_ec3724">#ec3724</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_e78231">#e78231</color>
+    <color name="color_ff9c3c">#ff9c3c</color>
+    <color name="color_C0A45F">#C0A45F</color>
+    <color name="color_ffcfa0">#ffcfa0</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_f4ba40">#f4ba40</color>
+    <color name="color_4296e1">#4296e1</color>
+    <color name="color_e6e6e6">#e6e6e6</color>
+    <color name="color_184358">#184358</color>
+    <color name="color_007ee1">#007ee1</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="color_ff8001">#ff8001</color>
+    <color name="color_4e616d">#4e616d</color>
+    <color name="color_ef87ee">#ef8733</color>
+    <color name="color_d5d5d5">#d5d5d5</color>
+    <color name="color_afb5bf">#afb5bf</color>
+    <color name="color_e6eaee">#e6eaee</color>
+    <color name="color_aeb5c0">#aeb5c0</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
+    <color name="color_4B8EF9">#4B8EF9</color>
+    <color name="color_ffa200">#ffa200</color>
+    <color name="color_1a1a1a">#1a1a1a</color>
+    <color name="color_d9d9d9">#d9d9d9</color>
+    <color name="color_fa0a0a">#fa0a0a</color>
+    <color name="color_00aefa">#00aefa</color>
+    <color name="color_fe5656">#fe5656</color>
+    <color name="color_f4f5fa">#f4f5fa</color>
+    <color name="color_e68932">#e68932</color>
+    <color name="color_ff8324">#ff8324</color>
+    <color name="color_ffc100">#f8d755</color>
+    <color name="color_ffd13e">#ffd13e</color>
+    <color name="color_f2f2f0">#f2f2f0</color>
+    <color name="color_ef8733">#ef8733</color>
+    <color name="color_494e57">#494e57</color>
+    <color name="color_f8d755">#f8d755</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_55cac4">#55cac4</color>
+    <color name="color_4d4d4d">#4d4d4d</color>
+    <color name="color_4abcc1">#4abcc1</color>
+    <color name="color_48b6bc">#48b6bc</color>
+    <color name="color_3ed1af">#3ed1af</color>
+    <color name="color_4abbc1">#4abbc1</color>
+    <color name="color_cdcdcd">#cdcdcd</color>
+    <color name="color_4bbac2">#4bbac2</color>
+    <color name="color_48c0bd">#48c0bd</color>
+    <color name="color_3dd2ae">#3dd2ae</color>
+    <color name="color_49bdc0">#49bdc0</color>
+    <color name="color_49bdbf">#49bdbf</color>
+    <color name="color_4768f3">#4768f3</color>
+    <color name="color_ecf8f8">#ecf8f8</color>
+    <color name="color_175e96">#175e96</color>
+    <color name="color_8fa4fc">#8fa4fc</color>
+    <color name="color_20ffffff">#20ffffff</color>
+    <color name="color_99ffffff">#99ffffff</color>
+    <color name="color_ed3a44">#ed3a44</color>
+    <color name="color_ff160f">#ff160f</color>
+    <color name="color_222137">#222137</color>
+    <color name="color_222222">#222222</color>
+    <color name="color_e4e4e4">#e4e4e4</color>
+    <color name="color_ff573f">#ff573f</color>
+    <color name="color_ffc91c">#ffc91c</color>
+    <color name="color_ececec">#ececec</color>
+    <color name="color_ffc600">#ffc600</color>
+    <color name="color_3626FF">#3626FF</color>
+    <color name="color_febf08">#febf08</color>
+    <color name="color_37acff">#37acff</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_636363">#636363</color>
+    <color name="color_388DFD">#388dfd</color>
+    <color name="color_dbdbdb">#dbdbdb</color>
+    <color name="color_f77d44">#f77d44</color>
+
+    <color name="qmui_dialog_action_text_color">#666666</color>
+    <color name="qmui_dialog_title_text_color">#666666</color>
+
+    <color name="home_btn_color">#febf08</color>
+    <color name="btn_common_color">#388dfd</color>
+    <color name="title_common_color">#388dfd</color>
+
+    <color name="base">#2c2c2c</color>
+
+    <!--有盾自定义
+    <color name="super_real_nav_bar">#4768f3</color>
+    <color name="super_real_nav_text">#ffffff</color>
+    <color name="super_real_light">#4768f3</color>
+    <color name="super_real_status_bar">#4768f3</color>-->
+
+    <color name="white">#ffffff</color>
+
+
+
+</resources>

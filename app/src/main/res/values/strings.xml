@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">JustCoffee</string>
+    <string name="accessibility_name">全无忧用户认证（请点击开启）</string>
+    <string name="string_operator_notice_1">1、请输入正确的运营商(移动、联通、电信)服务密码,如若忘记通过拨打运营商服务电话或登录网上营业厅找回密码。</string>
+    <string name="string_operator_notice_2">1、运营商认证需要2~3分钟,请耐心等待。\n2、中国移动发送2010到10086获取服务密码。\n3、中国联通发送13到10011获取服务密码。\n4、电信发送551到10001获取服务密码。</string>
+    <string name="string_zhima_protocol_1">1、授权%1$s将以下信息包括但不限于姓名、身份号码和手机号码传递给芝麻信用，用于芝麻信用自行或通过合作机构对你的身份信息进行校验。</string>
+    <string name="string_zhima_protocol_2">2、授权%1$s向芝麻信用查询你的芝麻分和相关信用信息，用于评估其与你之间的交易或服务条件。</string>
+    <string name="string_zhima_protocol_3">1、你授权芝麻信用可根据%1$s的查询请求，提供可以联系到你的电话号码、地址等联系信息，用于追究违约责任。</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="click_again_exit">再按一次退出应用</string>
+</resources>

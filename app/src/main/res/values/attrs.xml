@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StepProcessView">
+        <attr name="circle_radius_finished" format="dimension"/>
+        <attr name="circle_color_finished" format="color"/>
+        <attr name="circle_radius_unfinished" format="dimension"/>
+        <attr name="circle_color_unfinished" format="color"/>
+        <attr name="bottomtextsize" format="dimension"/>
+        <attr name="bottomtextcolor" format="color"/>
+        <attr name="lineheight" format="dimension"/>
+    </declare-styleable>
+
+    <attr name="title_bg_color" format="reference"/>
+    <attr name="title_text_color" format="reference"/>
+    <attr name="btn_bg_color" format="reference"/>
+    <attr name="btn_text_color" format="reference"/>
+    <attr name="base_bg_color" format="reference"/>
+    <attr name="base_color" format="reference"/>
+
+
+</resources>

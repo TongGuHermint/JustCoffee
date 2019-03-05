@@ -1,0 +1,75 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <!--修改QMUI属性覆盖默认-->
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+    </style>
+    <style name="style_minedata_container">
+        <item name="android:paddingLeft">@dimen/dimen_10dp</item>
+        <item name="android:paddingRight">@dimen/dimen_10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dimen_50dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="style_minedata_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/color_1a1a1a</item>
+        <item name="android:textSize">@dimen/dimen_16dp</item>
+    </style>
+    <style name="style_pay_iv">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">@dimen/dimen_20dp</item>
+        <item name="android:layout_height">@dimen/dimen_20dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="base_blue_style" parent="QMUI.Compat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <item name="title_bg_color">@color/base</item>
+        <item name="title_text_color">@color/color_ffffff</item>
+        <item name="btn_bg_color">@color/base</item>
+        <item name="btn_text_color">@color/color_ffffff</item>
+        <item name="base_bg_color">@color/base</item>
+    </style>
+    <style name="base_yellow_style" parent="QMUI.Compat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+        <!--<item name="title_bg_color"> @color/color_f8d755</item>
+        <item name="title_text_color">@color/color_ffffff</item>
+        <item name="btn_bg_color">@color/color_f8d755</item>
+        <item name="btn_text_color">@color/color_ffffff</item>
+        <item name="base_bg_color">@color/color_f8d755</item>-->
+        <item name="base_color">@color/base</item>
+    </style>
+   <!-- <style name="SuperAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        &lt;!&ndash;Window color&ndash;&gt;
+        <item name="colorPrimary">@color/color_4768f3</item>
+        <item name="colorPrimaryDark">@color/color_4768f3</item>
+        &lt;!&ndash;<item name="colorAccent">@color/colorAccent</item>&ndash;&gt;
+        <item name="android:windowBackground">@color/color_ffffff</item>
+    </style>-->
+</resources>
