@@ -13,6 +13,8 @@ public class ConstValues {
     public static final String FILE_DIRECTORY_IMG = FILE_ROOT_DIRECTORY+"/img";
 
     /**sharedpreference 判断是否已登录字段*/
+    public static final String ISADD = "isAdd";
+
     public static final String ISLOGIN = "islogin";
     public static final String ISLOAN = "isloan";
     public static final String ISRECORD = "isrecord";

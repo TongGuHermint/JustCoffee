@@ -2,34 +2,34 @@ package com.sh.justcoffee.view.fragment;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.j256.ormlite.dao.Dao;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sh.justcoffee.R;
 import com.sh.justcoffee.entity.BillDTO;
+import com.sh.justcoffee.utils.DataBaseHelper;
+import com.sh.justcoffee.entity.MenuDTO;
 import com.sh.justcoffee.view.activity.MainActivity;
 import com.sh.justcoffee.view.adapter.BillAdapter;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 
 /**
@@ -97,28 +97,29 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 
 	private void initData() {
 		mSwipe.finishRefresh();
-		mAdapter.addData(new BillDTO("美式咖啡", SPUtils.getInstance().getInt("美式咖啡")));
-		mAdapter.addData(new BillDTO("拿铁咖啡", SPUtils.getInstance().getInt("拿铁咖啡")));
-		mAdapter.addData(new BillDTO("卡布奇诺", SPUtils.getInstance().getInt("卡布奇诺")));
-		mAdapter.addData(new BillDTO("平白", SPUtils.getInstance().getInt("平白")));
-		mAdapter.addData(new BillDTO("风味拿铁", SPUtils.getInstance().getInt("风味拿铁")));
-		mAdapter.addData(new BillDTO("焦糖玛奇朵", SPUtils.getInstance().getInt("焦糖玛奇朵")));
-		mAdapter.addData(new BillDTO("摩卡咖啡", SPUtils.getInstance().getInt("摩卡咖啡")));
-		mAdapter.addData(new BillDTO("青柠冰咖", SPUtils.getInstance().getInt("青柠冰咖")));
-		mAdapter.addData(new BillDTO("鸳鸯咖啡", SPUtils.getInstance().getInt("鸳鸯咖啡")));
-		mAdapter.addData(new BillDTO("手冲", SPUtils.getInstance().getInt("手冲")));
-		mAdapter.addData(new BillDTO("冰滴冷萃", SPUtils.getInstance().getInt("冰滴冷萃")));
-		mAdapter.addData(new BillDTO("牛奶", SPUtils.getInstance().getInt("牛奶")));
-		mAdapter.addData(new BillDTO("巧克力", SPUtils.getInstance().getInt("巧克力")));
-		mAdapter.addData(new BillDTO("抹茶拿铁", SPUtils.getInstance().getInt("抹茶拿铁")));
-		mAdapter.addData(new BillDTO("红丝绒拿铁", SPUtils.getInstance().getInt("红丝绒拿铁")));
-		mAdapter.addData(new BillDTO("锡兰奶茶", SPUtils.getInstance().getInt("锡兰奶茶")));
-		mAdapter.addData(new BillDTO("巧克力沙冰", SPUtils.getInstance().getInt("巧克力沙冰")));
-		mAdapter.addData(new BillDTO("抹茶沙冰", SPUtils.getInstance().getInt("抹茶沙冰")));
-		mAdapter.addData(new BillDTO("红丝绒沙冰", SPUtils.getInstance().getInt("红丝绒沙冰")));
-		mAdapter.addData(new BillDTO("摩卡沙冰", SPUtils.getInstance().getInt("摩卡沙冰")));
-		mAdapter.addData(new BillDTO("风味咖啡沙冰", SPUtils.getInstance().getInt("风味咖啡沙冰")));
-		mAdapter.addData(new BillDTO("华夫饼", SPUtils.getInstance().getInt("华夫饼")));
+		/*mAdapter.addData(new BillDTO("美式咖啡", SPUtils.getInstance().getInt("美式咖啡") >0 ? SPUtils.getInstance().getInt("美式咖啡"):0));
+		mAdapter.addData(new BillDTO("拿铁咖啡", SPUtils.getInstance().getInt("拿铁咖啡")>0 ? SPUtils.getInstance().getInt("拿铁咖啡") :0));
+		mAdapter.addData(new BillDTO("卡布奇诺", SPUtils.getInstance().getInt("卡布奇诺")>0 ? SPUtils.getInstance().getInt("卡布奇诺"):0));
+		mAdapter.addData(new BillDTO("平白", SPUtils.getInstance().getInt("平白")>0 ? SPUtils.getInstance().getInt("平白"):0));
+		mAdapter.addData(new BillDTO("风味拿铁", SPUtils.getInstance().getInt("风味拿铁")>0 ? SPUtils.getInstance().getInt("风味拿铁"):0));
+		mAdapter.addData(new BillDTO("焦糖玛奇朵", SPUtils.getInstance().getInt("焦糖玛奇朵")>0 ? SPUtils.getInstance().getInt("焦糖玛奇朵"):0));
+		mAdapter.addData(new BillDTO("摩卡咖啡", SPUtils.getInstance().getInt("摩卡咖啡")>0 ?SPUtils.getInstance().getInt("摩卡咖啡"):0 ));
+		mAdapter.addData(new BillDTO("青柠冰咖", SPUtils.getInstance().getInt("青柠冰咖")>0 ? SPUtils.getInstance().getInt("青柠冰咖"):0));
+		mAdapter.addData(new BillDTO("鸳鸯咖啡", SPUtils.getInstance().getInt("鸳鸯咖啡")>0 ? SPUtils.getInstance().getInt("鸳鸯咖啡"):0));
+		mAdapter.addData(new BillDTO("手冲", SPUtils.getInstance().getInt("手冲")>0 ? SPUtils.getInstance().getInt("手冲"):0));
+		mAdapter.addData(new BillDTO("冰滴冷萃", SPUtils.getInstance().getInt("冰滴冷萃")>0 ? SPUtils.getInstance().getInt("冰滴冷萃"):0));
+		mAdapter.addData(new BillDTO("牛奶", SPUtils.getInstance().getInt("牛奶")>0 ? SPUtils.getInstance().getInt("牛奶"):0));
+		mAdapter.addData(new BillDTO("巧克力", SPUtils.getInstance().getInt("巧克力")>0 ?SPUtils.getInstance().getInt("巧克力"):0 ));
+		mAdapter.addData(new BillDTO("抹茶拿铁", SPUtils.getInstance().getInt("抹茶拿铁")>0 ? SPUtils.getInstance().getInt("抹茶拿铁"):0));
+		mAdapter.addData(new BillDTO("红丝绒拿铁", SPUtils.getInstance().getInt("红丝绒拿铁")>0 ? SPUtils.getInstance().getInt("红丝绒拿铁"):0));
+		mAdapter.addData(new BillDTO("锡兰奶茶", SPUtils.getInstance().getInt("锡兰奶茶")>0 ? SPUtils.getInstance().getInt("锡兰奶茶"):0));
+		mAdapter.addData(new BillDTO("巧克力沙冰", SPUtils.getInstance().getInt("巧克力沙冰")>0 ? SPUtils.getInstance().getInt("巧克力沙冰"):0));
+		mAdapter.addData(new BillDTO("抹茶沙冰", SPUtils.getInstance().getInt("抹茶沙冰")>0 ? SPUtils.getInstance().getInt("抹茶沙冰"):0));
+		mAdapter.addData(new BillDTO("红丝绒沙冰", SPUtils.getInstance().getInt("红丝绒沙冰")>0 ? SPUtils.getInstance().getInt("红丝绒沙冰"):0));
+		mAdapter.addData(new BillDTO("摩卡沙冰", SPUtils.getInstance().getInt("摩卡沙冰")>0 ?  SPUtils.getInstance().getInt("摩卡沙冰"):0));
+		mAdapter.addData(new BillDTO("风味咖啡沙冰", SPUtils.getInstance().getInt("风味咖啡沙冰")>0 ? SPUtils.getInstance().getInt("风味咖啡沙冰"):0));
+		mAdapter.addData(new BillDTO("华夫饼", SPUtils.getInstance().getInt("华夫饼")>0 ? SPUtils.getInstance().getInt("华夫饼"):0));*/
+		getMenuList();
 	}
 
 
@@ -137,5 +138,37 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 	public void onRefresh(@NonNull RefreshLayout refreshLayout) {
 		mAdapter.setNewData(null);
 		initData();
+	}
+
+
+
+	private void getMenuList(){
+		try {
+			Dao<MenuDTO,Integer> menuDAO = getMenuDAO();
+			List<MenuDTO> menuDTOList  = menuDAO.queryForAll();
+			if (menuDTOList.size() > 0){
+				for (MenuDTO menuDTO : menuDTOList){
+					Log.e("menuDTO",menuDTO.toString());
+					mAdapter.addData(new BillDTO(menuDTO.getName(),SPUtils.getInstance().getInt(menuDTO.getName())>0 ? SPUtils.getInstance().getInt(menuDTO.getName()):0));
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private  Dao<MenuDTO, Integer> mMenuDTODao;
+	/**
+	 * 获得MenuDTO
+	 * @throws SQLException
+	 */
+	public Dao<MenuDTO,Integer> getMenuDAO() throws SQLException {
+
+		if (mMenuDTODao == null)
+		{
+			mMenuDTODao = DataBaseHelper.getInstance(getActivity()).getDao(MenuDTO.class);
+		}
+		return mMenuDTODao;
 	}
 }

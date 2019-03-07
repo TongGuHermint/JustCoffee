@@ -78,5 +78,11 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.Rowandjj:VerticalBannerView:1.0'
     implementation 'com.github.385841539:MarqueeView:1.0.0'
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-20'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-20'
+    implementation files('libs/ormlite-android-5.1.jar')
+    implementation files('libs/ormlite-core-5.1.jar')
+
+    implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+
+
 }

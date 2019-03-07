@@ -6,19 +6,18 @@
     tools:context="com.sh.justcoffee.view.fragment.MenuFragment">
     <include layout="@layout/include_title_statusbar"/>
     <include layout="@layout/include_titlebar_righttext"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
         <LinearLayout
+            android:id="@+id/ll_total"
             android:paddingLeft="@dimen/dimen_20dp"
             android:paddingRight="@dimen/dimen_20dp"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:background="@color/color_ffffff">
             <TextView
                 android:layout_width="wrap_content"
@@ -38,7 +37,6 @@
                 android:textColor="@color/color_333333"
                 android:layout_gravity="center"/>
         </LinearLayout>
-    </FrameLayout>
 
 
 </LinearLayout>

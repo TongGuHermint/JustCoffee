@@ -8,11 +8,15 @@ import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.sh.justcoffee.R;
+import com.sh.justcoffee.utils.TimeUtil;
 import com.sh.justcoffee.widget.ViewPagerFix;
 import com.sh.justcoffee.view.fragment.BillFragment;
 import com.sh.justcoffee.view.fragment.MenuFragment;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,9 @@ public class MainActivity extends BaseActivity {
 	private MenuFragment mMenuFragment;
 	private List<Fragment> mFragments = new ArrayList<>();
 	private long exitTime = 0;
+	private String name;
+	private String englishName;
+	private String price;
 
 
 	@Override
@@ -45,6 +52,8 @@ public class MainActivity extends BaseActivity {
 		mFragments.add(mBillFragment);
 		initNavigateBottom();
 	}
+
+
 
 
 	private void initNavigateBottom() {
@@ -108,4 +117,18 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+	/*	try {
+			if (TimeUtil.IsToday("2019-03-08")){
+				Toast.makeText(MainActivity.this,"还是今天",Toast.LENGTH_SHORT).show();
+			}else {
+				Toast.makeText(MainActivity.this,"新的一天",Toast.LENGTH_SHORT).show();
+				SPUtils.getInstance().clear();
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}*/
+	}
 }
