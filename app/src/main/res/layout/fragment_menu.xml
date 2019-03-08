@@ -36,6 +36,14 @@
                 android:text="￥1000"
                 android:textColor="@color/color_333333"
                 android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tv_clean"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:text="清空"/>
         </LinearLayout>
 
 

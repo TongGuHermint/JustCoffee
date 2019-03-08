@@ -48,7 +48,8 @@
         </activity>
         <activity android:name=".view.activity.AddItemActivity" />
         <activity android:name=".view.activity.WebViewActivity" />
-        <activity android:name=".view.activity.TotalActivity"></activity>
+        <activity android:name=".view.activity.TotalActivity" />
+        <activity android:name=".view.activity.CustomerActivity"></activity>
     </application>
 
 </manifest>

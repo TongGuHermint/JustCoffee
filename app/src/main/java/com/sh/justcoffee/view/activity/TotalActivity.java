@@ -1,5 +1,6 @@
 package com.sh.justcoffee.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,8 @@ public class TotalActivity extends BaseActivity {
 	LinearLayout mIvBack;
 	@BindView(R.id.tv_total)
 	TextView mTvTotal;
+	@BindView(R.id.tv_righttext)
+	TextView mTvRighttext;
 
 	private BillAdapter mAdapter;
 	private int totalMoney = 0;
@@ -51,20 +54,22 @@ public class TotalActivity extends BaseActivity {
 	protected void initViews() {
 		BarUtils.setStatusBarAlpha(this, 0);
 		mIvBack.setVisibility(View.VISIBLE);
+		mTvTitle.setText("总帐单");
 		mBtn.setText("清空今日数据");
+		mTvRighttext.setText("历史账单");
 		mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 		mAdapter = new BillAdapter(null);
 		mRecycleView.setAdapter(mAdapter);
 		totalMoney = SPUtils.getInstance().getInt("totalMoney");
-		if (totalMoney < 0 ){
+		if (totalMoney < 0) {
 			totalMoney = 0;
-		}else {
+		} else {
 			totalMoney = SPUtils.getInstance().getInt("totalMoney");
 		}
-		mTvTotal.setText("¥"+String.valueOf(totalMoney));
+		mTvTotal.setText("¥" + String.valueOf(totalMoney));
 	}
 
-	@OnClick({R.id.iv_back, R.id.btn})
+	@OnClick({R.id.iv_back, R.id.btn,R.id.tv_righttext})
 	public void onViewClicked(View view) {
 		switch (view.getId()) {
 			case R.id.iv_back:
@@ -73,6 +78,9 @@ public class TotalActivity extends BaseActivity {
 			case R.id.btn:
 				SPUtils.getInstance().clear();
 				finish();
+				break;
+			case R.id.tv_righttext:
+				startActivity(new Intent(TotalActivity.this,CustomerActivity.class));
 				break;
 		}
 	}

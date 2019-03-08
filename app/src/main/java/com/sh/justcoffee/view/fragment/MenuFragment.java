@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout;
 import com.j256.ormlite.dao.Dao;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.sh.justcoffee.R;
+import com.sh.justcoffee.entity.CustomerDTO;
+import com.sh.justcoffee.utils.CustomerHelper;
 import com.sh.justcoffee.utils.DataBaseHelper;
 import com.sh.justcoffee.entity.MenuDTO;
 import com.sh.justcoffee.view.activity.AddItemActivity;
@@ -28,6 +31,7 @@ import com.sh.justcoffee.view.activity.TotalActivity;
 import com.sh.justcoffee.view.adapter.MenuAdapter;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,6 +59,7 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 	private MenuAdapter mAdapter;
 	private MainActivity mMainActivity;
 	private int totalMoney = 0;
+	private int OneBillMoney = 0;
 	private MenuDTO mMenuDTO;
 
 	public MenuFragment() {
@@ -144,7 +149,7 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 	}
 
 
-	@OnClick({R.id.iv_back, R.id.tv_righttext,R.id.ll_total})
+	@OnClick({R.id.iv_back, R.id.tv_righttext,R.id.ll_total,R.id.tv_clean})
 	public void onViewClicked(View view) {
 		switch (view.getId()) {
 			case R.id.iv_back:
@@ -155,6 +160,21 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 			case R.id.ll_total:
 				startActivity(new Intent(getActivity(), TotalActivity.class));
 				break;
+			case R.id.tv_clean:
+				addCustomerData();
+				SPUtils.getInstance().put("OneBillMoney",0);
+				updateOneBillMoney();
+
+				break;
+		}
+	}
+
+	private void addCustomerData() {
+		try {
+			Dao<CustomerDTO,Integer> customerDao = getCustomerDao();
+			customerDao.create(new CustomerDTO(TimeUtils.getNowString(),SPUtils.getInstance().getInt("OneBillMoney")));
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -190,9 +210,14 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 	}
 
 	private void addPrice(String price) {
+		//今日总账单
 		totalMoney = totalMoney + Integer.valueOf(price) ;
 		SPUtils.getInstance().put("totalMoney",totalMoney);
-		mTvTotal.setText("¥"+String.valueOf(totalMoney));
+		//单个客户账单
+		OneBillMoney = OneBillMoney + Integer.valueOf(price);
+		SPUtils.getInstance().put("OneBillMoney",OneBillMoney);
+
+		mTvTotal.setText("¥"+String.valueOf(OneBillMoney));
 	}
 
 	private void addCups(String name) {
@@ -218,6 +243,20 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 		return mMenuDTODao;
 	}
 
+	private  Dao<CustomerDTO, Integer> mCustomerDao;
+	/**
+	 * 获取CustomerDTO
+	 * @throws SQLException
+	 */
+	public Dao<CustomerDTO,Integer> getCustomerDao() throws SQLException {
+
+		if (mCustomerDao == null)
+		{
+			mCustomerDao = CustomerHelper.getInstance(getActivity()).getDao(CustomerDTO.class);
+		}
+		return mCustomerDao;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -228,8 +267,22 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 			totalMoney = SPUtils.getInstance().getInt("totalMoney");
 		}
 		mTvTotal.setText("¥"+String.valueOf(totalMoney));
+
+		updateOneBillMoney();
+
+
 		mAdapter.setNewData(null);
 		initData();
+	}
+
+	private void updateOneBillMoney(){
+		OneBillMoney = SPUtils.getInstance().getInt("OneBillMoney");
+		if (OneBillMoney < 0 ){
+			OneBillMoney = 0;
+		}else {
+			OneBillMoney = SPUtils.getInstance().getInt("OneBillMoney");
+		}
+		mTvTotal.setText("¥"+String.valueOf(OneBillMoney));
 	}
 
 	@Override
@@ -293,7 +346,6 @@ public class MenuFragment extends BaseFragment implements BaseQuickAdapter.OnIte
 					.putExtra("type","change")
 					.putExtra("change_id",id)
 					.putExtra("oldName",menuDAO.queryForId(id).getName()));
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

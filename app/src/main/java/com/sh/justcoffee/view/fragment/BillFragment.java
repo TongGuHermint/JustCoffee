@@ -2,12 +2,15 @@ package com.sh.justcoffee.view.fragment;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,8 +23,8 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sh.justcoffee.R;
 import com.sh.justcoffee.entity.BillDTO;
-import com.sh.justcoffee.utils.DataBaseHelper;
 import com.sh.justcoffee.entity.MenuDTO;
+import com.sh.justcoffee.utils.DataBaseHelper;
 import com.sh.justcoffee.view.activity.MainActivity;
 import com.sh.justcoffee.view.adapter.BillAdapter;
 
@@ -29,7 +32,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -50,12 +55,16 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 	RecyclerView mRecycleView;
 	@BindView(R.id.swipe)
 	SmartRefreshLayout mSwipe;
+	@BindView(R.id.tv_total)
+	TextView mTvTotal;
+
 
 
 	private BillAdapter mAdapter;
 	private BillDTO mBillDTO;
 	private boolean isGetData = false;
 	private MainActivity mMainActivity;
+	private int totalMoney = 0;
 
 	public BillFragment() {
 		// Required empty public constructor
@@ -70,7 +79,7 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		super.setUserVisibleHint(isVisibleToUser);
-		if (/*!hasLoadDataFinished &&*/ isVisibleToUser){
+		if (/*!hasLoadDataFinished &&*/ isVisibleToUser) {
 //			mSwipe.autoRefresh();
 			mAdapter.setNewData(null);
 			initData();
@@ -85,7 +94,7 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 
 	@Override
 	protected void initViews() {
-		mTvTitle.setText("账单");
+		mTvTitle.setText("总账单");
 		mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		mAdapter = new BillAdapter(null);
 		mSwipe.setOnRefreshListener(this);
@@ -93,10 +102,22 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 		mSwipe.setRefreshHeader(new ClassicsHeader(getActivity()));
 		initData();
 		mSwipe.autoRefresh();
+
+	}
+
+	private void updateTotalMoney() {
+		totalMoney = SPUtils.getInstance().getInt("totalMoney");
+		if (totalMoney < 0 ){
+			totalMoney = 0;
+		}else {
+			totalMoney = SPUtils.getInstance().getInt("totalMoney");
+		}
+		mTvTotal.setText("¥"+String.valueOf(totalMoney));
 	}
 
 	private void initData() {
 		mSwipe.finishRefresh();
+		updateTotalMoney();
 		/*mAdapter.addData(new BillDTO("美式咖啡", SPUtils.getInstance().getInt("美式咖啡") >0 ? SPUtils.getInstance().getInt("美式咖啡"):0));
 		mAdapter.addData(new BillDTO("拿铁咖啡", SPUtils.getInstance().getInt("拿铁咖啡")>0 ? SPUtils.getInstance().getInt("拿铁咖啡") :0));
 		mAdapter.addData(new BillDTO("卡布奇诺", SPUtils.getInstance().getInt("卡布奇诺")>0 ? SPUtils.getInstance().getInt("卡布奇诺"):0));
@@ -141,15 +162,17 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 	}
 
 
-
-	private void getMenuList(){
+	private void getMenuList() {
 		try {
-			Dao<MenuDTO,Integer> menuDAO = getMenuDAO();
-			List<MenuDTO> menuDTOList  = menuDAO.queryForAll();
-			if (menuDTOList.size() > 0){
-				for (MenuDTO menuDTO : menuDTOList){
-					Log.e("menuDTO",menuDTO.toString());
-					mAdapter.addData(new BillDTO(menuDTO.getName(),SPUtils.getInstance().getInt(menuDTO.getName())>0 ? SPUtils.getInstance().getInt(menuDTO.getName()):0));
+			Dao<MenuDTO, Integer> menuDAO = getMenuDAO();
+			List<MenuDTO> menuDTOList = menuDAO.queryForAll();
+			if (menuDTOList.size() > 0) {
+				for (MenuDTO menuDTO : menuDTOList) {
+					Log.e("menuDTO", menuDTO.toString());
+//					mAdapter.addData(new BillDTO(menuDTO.getName(), SPUtils.getInstance().getInt(menuDTO.getName()) > 0 ? SPUtils.getInstance().getInt(menuDTO.getName()) : 0));
+					if (SPUtils.getInstance().getInt(menuDTO.getName()) > 0) {
+						mAdapter.addData(new BillDTO(menuDTO.getName(), SPUtils.getInstance().getInt(menuDTO.getName()) > 0 ? SPUtils.getInstance().getInt(menuDTO.getName()) : 0));
+					}
 				}
 			}
 
@@ -158,15 +181,16 @@ public class BillFragment extends BaseFragment implements OnRefreshListener {
 		}
 	}
 
-	private  Dao<MenuDTO, Integer> mMenuDTODao;
+	private Dao<MenuDTO, Integer> mMenuDTODao;
+
 	/**
 	 * 获得MenuDTO
+	 *
 	 * @throws SQLException
 	 */
-	public Dao<MenuDTO,Integer> getMenuDAO() throws SQLException {
+	public Dao<MenuDTO, Integer> getMenuDAO() throws SQLException {
 
-		if (mMenuDTODao == null)
-		{
+		if (mMenuDTODao == null) {
 			mMenuDTODao = DataBaseHelper.getInstance(getActivity()).getDao(MenuDTO.class);
 		}
 		return mMenuDTODao;
